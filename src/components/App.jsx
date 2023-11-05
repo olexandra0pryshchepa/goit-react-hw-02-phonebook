@@ -15,7 +15,9 @@ export class App extends Component {
   handleAddContact = contactData => {
     const { name, number } = contactData;
     const hasDublicates = this.state.contacts.some(
-      contact => contact.name === name || contact.number === number
+      contact =>
+        contact.name.toLowerCase() === name.toLowerCase() ||
+        contact.number.toLowerCase() === number.toLowerCase()
     );
 
     if (hasDublicates) {
@@ -38,9 +40,9 @@ export class App extends Component {
   };
 
   handleDeleteContact = contactId => {
-    this.setState({
-      contacts: this.state.contacts.filter(contact => contact.id !== contactId),
-    });
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
   };
 
   handleFilterContacts = () => {

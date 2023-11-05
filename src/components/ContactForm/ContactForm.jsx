@@ -5,23 +5,14 @@ export default class ContactForm extends Component {
   state = {
     name: '',
     number: '',
-  };
-
+    };
+    
   handleSubmit = event => {
     event.preventDefault();
-    const data = {
-      name: this.state.name,
-      number: this.state.number,
-      };
-      this.props.onAdd(data);
+    this.props.onAdd(this.state);
   };
 
-  handleNameChange = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-  };
-
-  handleNumberChange = event => {
+  handleChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
@@ -38,7 +29,7 @@ export default class ContactForm extends Component {
               required
               pattern="[a-zA-Zа-яА-ЯіІїЇґҐєЄ']+"
               value={this.state.name}
-              onChange={this.handleNameChange}
+              onChange={this.handleChange}
             />
           </label>
           <label>
@@ -50,10 +41,12 @@ export default class ContactForm extends Component {
               pattern="^\+?\d{1,4}[ .\-]?\(?\d{1,3}\)?[ .\-]?\d{1,4}[ .\-]?\d{1,4}[ .\-]?\d{1,9}$"
               title="Format: XXX-XXX-XX-XX"
               value={this.state.number}
-              onChange={this.handleNumberChange}
+              onChange={this.handleChange}
             />
           </label>
-          <button className="submit-btn" type="submit">Add contact</button>
+          <button className="submit-btn" type="submit">
+            Add contact
+          </button>
         </form>
       </>
     );
